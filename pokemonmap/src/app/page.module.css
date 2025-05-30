@@ -1,0 +1,24 @@
+.background {
+  /* width: 100dvw; */
+  /* height: 100dvh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 2px solid red; */
+}
+
+.background button {
+  width: 100px;
+  height: 50px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(37, 147, 255);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
