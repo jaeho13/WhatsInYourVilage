@@ -1,24 +1,33 @@
-.background {
-  /* width: 100dvw; */
-  /* height: 100dvh; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  /* border: 2px solid red; */
+.container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-.background button {
-  width: 100px;
-  height: 50px;
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(37, 147, 255);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.mainImg {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background-color: beige;
 }
 
+.bind {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(228, 228, 56);
+}
+
+.btn {
+ width: 100px;
+ height: 50px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: rgb(37, 147, 255);
+ color: white;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+}
