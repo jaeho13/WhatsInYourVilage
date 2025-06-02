@@ -2,8 +2,13 @@ import Image from "next/image";
 import style from "./page.module.css";
 import { localeMap, pokemonByLocale } from "@/types";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const localeKey = params.id;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const localeKey = id;
   const localeName = localeMap[localeKey] ?? "알 수 없는 지역";
 
   const pokeIds = pokemonByLocale[localeKey] ?? pokemonByLocale[""];
