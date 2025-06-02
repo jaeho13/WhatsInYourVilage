@@ -30,7 +30,8 @@ export default function RootLayout({
               <div>우리 동네 포켓몬 찾기</div>
             </div>
 
-            {pathname === "/map" && (
+            {/* {pathname === "/map" && ( */}
+            {pathname.startsWith("/map") && (
               <div className={style.headerSelect}>
                 <select
                   className={style.selectOption}
