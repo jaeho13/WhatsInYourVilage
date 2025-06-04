@@ -1,6 +1,7 @@
 import Image from "next/image";
 import style from "./page.module.css";
 import { localeMap, pokemonByLocale } from "@/types";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -37,12 +38,14 @@ export default async function Page({
       <div className={style.boxBind}>
         {pokemons.map((pokemon) => (
           <div key={pokemon.id} className={style.infoBox}>
-            <Image
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              width={150}
-              height={150}
-            />
+            <Link href={`/info/${pokemon.id}`}>
+              <Image
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                width={150}
+                height={150}
+              />
+            </Link>
           </div>
         ))}
       </div>
