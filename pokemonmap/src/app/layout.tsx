@@ -6,16 +6,17 @@ import style from "./layout.module.css";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { ReactNode } from "react";
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: ReactNode;
 }>) {
   const pathname = usePathname();
-
   const [defaultValue, setDefaultValue] = useState("");
-
   const router = useRouter();
 
   return (
@@ -30,7 +31,6 @@ export default function RootLayout({
               <div>우리 동네 포켓몬 찾기</div>
             </div>
 
-            {/* {pathname === "/map" && ( */}
             {pathname.startsWith("/map") && (
               <div className={style.headerSelect}>
                 <select
@@ -76,6 +76,8 @@ export default function RootLayout({
           </header>
           <main>{children}</main>
         </div>
+        {modal}
+        <div id="modal-root"></div>
       </body>
     </html>
   );
