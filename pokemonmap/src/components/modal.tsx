@@ -22,7 +22,7 @@ export default function Modal({ children }: { children: ReactNode }) {
     <dialog
       onClose={() => router.back()}
       onClick={(e) => {
-        if ((e.target as any).nodeName === "DIALOG") {
+        if (e.target === e.currentTarget) {
           router.back();
         }
       }}
