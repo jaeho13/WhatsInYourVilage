@@ -57,3 +57,65 @@ export const pokemonByLocale: { [key: string]: number[] } = {
   Jung: [133, 132, 52, 83, 113, 127],
   Jungnang: [21, 123, 84, 19, 27, 48],
 };
+
+export interface PokemonName {
+  language: { name: string };
+  name: string;
+}
+
+export interface FlavorTextEntry {
+  flavor_text: string;
+  language: { name: string };
+}
+
+export interface PokemonSpecies {
+  names: PokemonName[];
+  flavor_text_entries: FlavorTextEntry[];
+}
+
+export interface MoveDetail {
+  names: PokemonName[];
+}
+
+
+export const typeMap: { [key: string]: string } = {
+  normal: "노말",
+  fire: "불꽃",
+  water: "물",
+  electric: "전기",
+  grass: "풀",
+  ice: "얼음",
+  fighting: "격투",
+  poison: "독",
+  ground: "땅",
+  flying: "비행",
+  psychic: "에스퍼",
+  bug: "벌레",
+  rock: "바위",
+  ghost: "고스트",
+  dragon: "드래곤",
+  dark: "악",
+  steel: "강철",
+  fairy: "페어리",
+};
+
+export const typeColorMap: { [key: string]: string } = {
+  grass: "#A8E6A3",      
+  bug: "#A8E6A3",
+  poison: "#A8E6A3",
+  fire: "#FF7262",       
+  water: "#76C7F2",      
+  ice: "#76C7F2",
+  electric: "#FFF176",  
+  fighting: "#F4A460",   
+  ground: "#F4A460",
+  rock: "#F4A460",
+  psychic: "#CBA4E8",    
+  ghost: "#CBA4E8",
+  normal: "#E0E0E0",     
+  flying: "#E0E0E0",
+  dark: "#2F2F2F",      
+  steel: "#B0BEC5",      
+  fairy: "#F8BBD0",     
+  dragon: "#FFA726",    
+};
