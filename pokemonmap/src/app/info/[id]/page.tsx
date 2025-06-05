@@ -75,28 +75,31 @@ export default async function Page({
   }
 
   return (
-    <div className={style.container} style={{ backgroundColor }}>
-      <div className={style.pokemon}>
-        <h3>{koreanName}</h3>&nbsp;&nbsp;
-        <h4>
-          키: {pokemon.height / 10}m&nbsp;몸무게: {pokemon.weight / 10}kg&nbsp;
-          {koreanTypes.join(", ")} 타입
-        </h4>
-      </div>
-      <div className={style.imageBox}>
-        <Image
-          src={pokemon.sprites.front_default}
-          alt={pokemon.name}
-          width={350}
-          height={350}
-        />
-      </div>
+    <div className={style.test}>
+      <div className={style.container} style={{ backgroundColor }}>
+        <div className={style.pokemon}>
+          <h3>{koreanName}</h3>&nbsp;&nbsp;
+          <h4>
+            키: {pokemon.height / 10}m&nbsp;몸무게: {pokemon.weight / 10}
+            kg&nbsp;
+            {koreanTypes.join(", ")} 타입
+          </h4>
+        </div>
+        <div className={style.imageBox}>
+          <Image
+            src={pokemon.sprites.front_default}
+            alt={pokemon.name}
+            width={350}
+            height={350}
+          />
+        </div>
 
-      <div className={style.infoContainer}>
-        <div className={style.infoBox}>{koreanDescription}</div>
-        <br />
-        <div>기술 - {koreanSkill.join(", ")}</div>
-        <br />
+        <div className={style.infoContainer}>
+          <div className={style.infoBox}>{koreanDescription}</div>
+          <br />
+          <div>기술 - {koreanSkill.join(", ")}</div>
+          <br />
+        </div>
       </div>
     </div>
   );
