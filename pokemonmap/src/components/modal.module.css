@@ -5,6 +5,7 @@
     margin-top: 50px;
     border: none;
     border-radius: 12px;
+    background-color: transparent;
 }
 
 .modal::backdrop {
