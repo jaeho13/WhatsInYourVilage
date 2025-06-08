@@ -17,9 +17,12 @@ export default async function Page({
 }) {
   const { id } = await params;
 
+  let rarity: string;
   let pokemon;
   let pokemonSpecies: PokemonSpecies;
   let koreanName: string;
+  let koreanGenus: string;
+
   let koreanDescription: string;
   let koreanTypes: string[] = [];
   let koreanSkill: string[] = [];
@@ -38,6 +41,18 @@ export default async function Page({
     if (!speciesRes.ok) throw new Error();
     pokemonSpecies = await speciesRes.json();
 
+    const rate = pokemonSpecies.capture_rate;
+
+    if (rate <= 29) {
+      rarity = "전설/환상";
+    } else if (rate <= 70) {
+      rarity = "희귀";
+    } else if (rate <= 120) {
+      rarity = "일반";
+    } else {
+      rarity = "흔함";
+    }
+
     // 3. 한국어 이름/설명
     koreanName =
       pokemonSpecies.names.find(
@@ -48,6 +63,10 @@ export default async function Page({
       pokemonSpecies.flavor_text_entries.find(
         (entry: FlavorTextEntry) => entry.language.name === "ko"
       )?.flavor_text || "설명을 찾을 수 없습니다.";
+
+    koreanGenus =
+      pokemonSpecies.genera.find((g) => g.language.name === "ko")?.genus ||
+      "분류 없음";
 
     // 4. 포켓몬 타입 한글명 & 배경색 처리
     koreanTypes = pokemon.types.map(
@@ -77,7 +96,7 @@ export default async function Page({
 
   return (
     <>
-      <div className={style.container}>
+      {/* <div className={style.container}>
         <div className={style.background} style={{ backgroundColor }}>
           <div className={style.pokemon}>
             <h3>{koreanName}</h3>&nbsp;&nbsp;
@@ -106,6 +125,46 @@ export default async function Page({
 
       <div className={style.btnContainer}>
         <BackBtn>확인</BackBtn>
+      </div> */}
+
+      <div className={style.background}>
+        <div className={style.rowBind}>
+          <div className={style.testBorder}>
+            <Image
+              src={pokemon.sprites.front_default}
+              alt={pokemon.name}
+              width={100}
+              height={100}
+              style={{
+                transform: "scale(1.5)",
+                transformOrigin: "center",
+              }}
+            />
+          </div>
+          <div className={style.columnBind}>
+            <div className={style.pokemonName}>{koreanName}</div>
+            <div className={style.pokemonGenus}>{koreanGenus}</div>
+            <div className={style.pokemonType}>
+              {koreanTypes.join(", ")} 타입
+            </div>
+          </div>
+          <div>닫기 이미지</div>
+        </div>
+
+        <div className={style.pokemonInfo}>
+          <div className={style.infoItem}>
+            <div className={style.infoText}>키</div>
+            <div className={style.infonumber}>{pokemon.height / 10}m</div>
+          </div>
+          <div className={style.infoItem}>
+            <div className={style.infoText}>무게</div>
+            <div className={style.infonumber}>{pokemon.weight / 10}kg</div>
+          </div>
+          <div className={style.infoItem}>
+            <div className={style.infoText}>희귀도</div>
+            <div className={style.infonumber}>{rarity}</div>
+          </div>
+        </div>
       </div>
     </>
   );

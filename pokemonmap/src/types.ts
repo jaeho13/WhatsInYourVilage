@@ -70,7 +70,14 @@ export interface FlavorTextEntry {
 
 export interface PokemonSpecies {
   names: PokemonName[];
+  capture_rate: number;
   flavor_text_entries: FlavorTextEntry[];
+  genera: {
+    genus: string;
+    language: {
+      name: string;
+    };
+  }[];
 }
 
 export interface MoveDetail {
