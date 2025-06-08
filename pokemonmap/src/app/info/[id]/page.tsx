@@ -83,8 +83,7 @@ export default async function Page({
             <h3>{koreanName}</h3>&nbsp;&nbsp;
             <h4>
               키: {pokemon.height / 10}m&nbsp;몸무게: {pokemon.weight / 10}
-              kg&nbsp;
-              {koreanTypes.join(", ")} 타입
+              kg&nbsp;/&nbsp;{koreanTypes.join(", ")} 타입
             </h4>
           </div>
           <div className={style.imageBox}>
@@ -104,6 +103,7 @@ export default async function Page({
           </div>
         </div>
       </div>
+
       <div className={style.btnContainer}>
         <BackBtn>확인</BackBtn>
       </div>
