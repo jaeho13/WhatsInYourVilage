@@ -137,7 +137,7 @@ export default async function Page({
                 width={100}
                 height={100}
                 style={{
-                  transform: "scale(1.5)",
+                  transform: "scale(1.3)",
                   transformOrigin: "center",
                 }}
               />
@@ -182,8 +182,8 @@ export default async function Page({
           <div>{koreanDescription}</div>
         </div>
         <div className={style.btnBind}>
-          <button className={style.testBtn}>카드보기</button>
-          <button className={style.testBtn}>즐겨찾기</button>
+          <button className={style.btnOption}>카드보기</button>
+          <button className={style.btnOption}>즐겨찾기</button>
         </div>
       </div>
     </>

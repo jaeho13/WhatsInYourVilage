@@ -64,7 +64,7 @@
 .columnBind {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .background {
@@ -181,7 +181,7 @@
     justify-content: space-around;
 }
 
-.testBtn {
+.btnOption {
     width: 45%;
     min-width: 160px;
     height: 60px;
