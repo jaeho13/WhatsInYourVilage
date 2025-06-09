@@ -8,7 +8,7 @@ import {
   MoveDetail,
   typeColorMap,
 } from "@/types";
-import BackBtn from "@/components/backbtn";
+import BackIcon from "@/components/backIcon";
 
 export default async function Page({
   params,
@@ -128,27 +128,30 @@ export default async function Page({
       </div> */}
 
       <div className={style.background}>
-        <div className={style.rowBind}>
-          <div>
-            <Image
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              width={100}
-              height={100}
-              style={{
-                transform: "scale(1.5)",
-                transformOrigin: "center",
-              }}
-            />
-          </div>
-          <div className={style.columnBind}>
-            <div className={style.pokemonName}>{koreanName}</div>
-            <div className={style.pokemonGenus}>{koreanGenus}</div>
-            <div className={style.pokemonType}>
-              {koreanTypes.join(", ")} 타입
+        <div className={style.topLine}>
+          <div className={style.rowBind}>
+            <div>
+              <Image
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                width={100}
+                height={100}
+                style={{
+                  transform: "scale(1.5)",
+                  transformOrigin: "center",
+                }}
+              />
+            </div>
+            <div className={style.columnBind}>
+              <div className={style.pokemonName}>{koreanName}</div>
+              <div className={style.pokemonGenus}>{koreanGenus}</div>
+              <div className={style.pokemonType}>
+                {koreanTypes.join(", ")} 타입
+              </div>
             </div>
           </div>
-          <div>닫기 이미지</div>
+          {/* <XCircle size={32} color="#000000" /> */}
+          <BackIcon size={32} color="#000000" />
         </div>
 
         <div className={style.pokemonInfo}>

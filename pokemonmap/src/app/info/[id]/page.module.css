@@ -64,6 +64,7 @@
 .columnBind {
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
 }
 
 .background {
@@ -73,6 +74,11 @@
     background-color: #ffe558;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+}
+
+.topLine {
+    display: flex;
+    justify-content: space-between;
 }
 
 .pokemonName {
