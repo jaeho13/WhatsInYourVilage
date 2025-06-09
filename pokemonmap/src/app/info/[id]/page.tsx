@@ -129,7 +129,7 @@ export default async function Page({
 
       <div className={style.background}>
         <div className={style.rowBind}>
-          <div className={style.testBorder}>
+          <div>
             <Image
               src={pokemon.sprites.front_default}
               alt={pokemon.name}
@@ -164,6 +164,23 @@ export default async function Page({
             <div className={style.infoText}>희귀도</div>
             <div className={style.infonumber}>{rarity}</div>
           </div>
+        </div>
+      </div>
+
+      <div className={style.tabContainer}>
+        <div className={style.tabItem}>소개</div>
+        <div className={style.tabItem}>능력치</div>
+        <div className={style.tabItem}>기술</div>
+      </div>
+
+      <div className={style.bottomArea}>
+        <div>
+          <h3 className={style.bottomText}>특징</h3>
+          <div>{koreanDescription}</div>
+        </div>
+        <div className={style.btnBind}>
+          <button className={style.testBtn}>카드보기</button>
+          <button className={style.testBtn}>즐겨찾기</button>
         </div>
       </div>
     </>
