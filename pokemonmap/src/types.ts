@@ -126,3 +126,17 @@ export const typeColorMap: { [key: string]: string } = {
   fairy: "#F8BBD0",     
   dragon: "#FFA726",    
 };
+
+
+export type TabType = "소개" | "능력치" | "기술";
+
+export interface PokemonStat {
+  stat: { name: string };
+  base_stat: number;
+}
+
+export interface PokemonTabsProps {
+  koreanDescription: string;
+  stats: PokemonStat[];
+  koreanSkill: string[];
+}

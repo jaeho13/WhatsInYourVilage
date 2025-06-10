@@ -9,6 +9,7 @@ import {
   typeColorMap,
 } from "@/types";
 import BackIcon from "@/components/backIcon";
+import PokemonTabs from "./pokemonTabs";
 
 export default async function Page({
   params,
@@ -26,7 +27,7 @@ export default async function Page({
   let koreanDescription: string;
   let koreanTypes: string[] = [];
   let koreanSkill: string[] = [];
-  let backgroundColor: string = "white";
+  // let backgroundColor: string = "white";
 
   try {
     // 1. 포켓몬 기본 정보 가져오기
@@ -73,9 +74,9 @@ export default async function Page({
       (t: any) => typeMap[t.type.name] || t.type.name
     );
     const primaryType = pokemon.types?.[0]?.type?.name;
-    backgroundColor = typeColorMap[primaryType] || "white";
+    // backgroundColor = typeColorMap[primaryType] || "white";
 
-    // 5. 포켓몬 기술 2개만 가져와서 한글명 fetch
+    // 5. 포켓몬 기술 4개만 가져와서 한글명 fetch
     const moveUrls = pokemon.moves.slice(0, 4).map((m: any) => m.move.url);
 
     const moveResults = await Promise.all(
@@ -96,37 +97,6 @@ export default async function Page({
 
   return (
     <>
-      {/* <div className={style.container}>
-        <div className={style.background} style={{ backgroundColor }}>
-          <div className={style.pokemon}>
-            <h3>{koreanName}</h3>&nbsp;&nbsp;
-            <h4>
-              키: {pokemon.height / 10}m&nbsp;몸무게: {pokemon.weight / 10}
-              kg&nbsp;/&nbsp;{koreanTypes.join(", ")} 타입
-            </h4>
-          </div>
-          <div className={style.imageBox}>
-            <Image
-              src={pokemon.sprites.front_default}
-              alt={pokemon.name}
-              width={350}
-              height={350}
-            />
-          </div>
-
-          <div className={style.infoContainer}>
-            <div className={style.infoBox}>{koreanDescription}</div>
-            <br />
-            <div>기술 - {koreanSkill.join(", ")}</div>
-            <br />
-          </div>
-        </div>
-      </div>
-
-      <div className={style.btnContainer}>
-        <BackBtn>확인</BackBtn>
-      </div> */}
-
       <div className={style.background}>
         <div className={style.topLine}>
           <div className={style.rowBind}>
@@ -150,7 +120,6 @@ export default async function Page({
               </div>
             </div>
           </div>
-          {/* <XCircle size={32} color="#000000" /> */}
           <BackIcon size={32} color="#000000" />
         </div>
 
@@ -170,22 +139,11 @@ export default async function Page({
         </div>
       </div>
 
-      <div className={style.tabContainer}>
-        <div className={style.tabItem}>소개</div>
-        <div className={style.tabItem}>능력치</div>
-        <div className={style.tabItem}>기술</div>
-      </div>
-
-      <div className={style.bottomArea}>
-        <div>
-          <h3 className={style.bottomText}>특징</h3>
-          <div>{koreanDescription}</div>
-        </div>
-        <div className={style.btnBind}>
-          <button className={style.btnOption}>카드보기</button>
-          <button className={style.btnOption}>즐겨찾기</button>
-        </div>
-      </div>
+      <PokemonTabs
+        koreanDescription={koreanDescription}
+        stats={pokemon.stats}
+        koreanSkill={koreanSkill}
+      />
     </>
   );
 }
