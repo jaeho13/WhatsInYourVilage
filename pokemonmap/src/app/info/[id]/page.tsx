@@ -29,7 +29,7 @@ export default async function Page({
   let koreanDescription: string;
   let koreanTypes: string[] = [];
   let koreanSkill: string[] = [];
-  // let backgroundColor: string = "white";
+  let backgroundColor: string = "white";
 
   try {
     // 1. 포켓몬 기본 정보 가져오기
@@ -76,7 +76,7 @@ export default async function Page({
       (t: any) => typeMap[t.type.name] || t.type.name
     );
     const primaryType = pokemon.types?.[0]?.type?.name;
-    // backgroundColor = typeColorMap[primaryType] || "white";
+    backgroundColor = typeColorMap[primaryType] || "white";
 
     // 5. 포켓몬 기술 4개만 가져와서 한글명 fetch
     const moveUrls = pokemon.moves.slice(0, 4).map((m: any) => m.move.url);
@@ -104,7 +104,10 @@ export default async function Page({
           !isModal ? style.border : ""
         }`}
       >
-        <div className={style.background}>
+        <div
+          className={style.background}
+          style={{ background: backgroundColor }}
+        >
           <div className={style.topLine}>
             <div className={style.rowBind}>
               <div>
