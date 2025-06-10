@@ -13,8 +13,10 @@ import PokemonTabs from "./pokemonTabs";
 
 export default async function Page({
   params,
+  isModal = false,
 }: {
   params: Promise<{ id: string }>;
+  isModal?: boolean;
 }) {
   const { id } = await params;
 
@@ -97,53 +99,59 @@ export default async function Page({
 
   return (
     <>
-      <div className={style.background}>
-        <div className={style.topLine}>
-          <div className={style.rowBind}>
-            <div>
-              <Image
-                src={pokemon.sprites.front_default}
-                alt={pokemon.name}
-                width={100}
-                height={100}
-                style={{
-                  transform: "scale(1.3)",
-                  transformOrigin: "center",
-                }}
-              />
-            </div>
-            <div className={style.columnBind}>
-              <div className={style.pokemonName}>{koreanName}</div>
-              <div className={style.pokemonGenus}>{koreanGenus}</div>
-              <div className={style.pokemonType}>
-                {koreanTypes.join(", ")} 타입
+      <div
+        className={`${style.modalPageContainer} ${
+          !isModal ? style.border : ""
+        }`}
+      >
+        <div className={style.background}>
+          <div className={style.topLine}>
+            <div className={style.rowBind}>
+              <div>
+                <Image
+                  src={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                  width={100}
+                  height={100}
+                  style={{
+                    transform: "scale(1.3)",
+                    transformOrigin: "center",
+                  }}
+                />
+              </div>
+              <div className={style.columnBind}>
+                <div className={style.pokemonName}>{koreanName}</div>
+                <div className={style.pokemonGenus}>{koreanGenus}</div>
+                <div className={style.pokemonType}>
+                  {koreanTypes.join(", ")} 타입
+                </div>
               </div>
             </div>
+            <BackIcon size={32} color="#000000" />
           </div>
-          <BackIcon size={32} color="#000000" />
+
+          <div className={style.pokemonInfo}>
+            <div className={style.infoItem}>
+              <div className={style.infoText}>키</div>
+              <div className={style.infonumber}>{pokemon.height / 10}m</div>
+            </div>
+            <div className={style.infoItem}>
+              <div className={style.infoText}>무게</div>
+              <div className={style.infonumber}>{pokemon.weight / 10}kg</div>
+            </div>
+            <div className={style.infoItem}>
+              <div className={style.infoText}>희귀도</div>
+              <div className={style.infonumber}>{rarity}</div>
+            </div>
+          </div>
         </div>
 
-        <div className={style.pokemonInfo}>
-          <div className={style.infoItem}>
-            <div className={style.infoText}>키</div>
-            <div className={style.infonumber}>{pokemon.height / 10}m</div>
-          </div>
-          <div className={style.infoItem}>
-            <div className={style.infoText}>무게</div>
-            <div className={style.infonumber}>{pokemon.weight / 10}kg</div>
-          </div>
-          <div className={style.infoItem}>
-            <div className={style.infoText}>희귀도</div>
-            <div className={style.infonumber}>{rarity}</div>
-          </div>
-        </div>
+        <PokemonTabs
+          koreanDescription={koreanDescription}
+          stats={pokemon.stats}
+          koreanSkill={koreanSkill}
+        />
       </div>
-
-      <PokemonTabs
-        koreanDescription={koreanDescription}
-        stats={pokemon.stats}
-        koreanSkill={koreanSkill}
-      />
     </>
   );
 }

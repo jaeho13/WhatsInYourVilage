@@ -9,6 +9,15 @@
     margin-left: 15px;
 }
 
+.modalPageContainer {
+    border-radius: 12px;
+}
+
+.border {
+    border-radius: 16px;
+    border: 4px solid black;
+}
+
 .background {
     width: 100%;
     height: 260px;

@@ -4,7 +4,7 @@ import InfoPage from "@/app/info/[id]/page";
 export default function InterceptedInfoPage(props: any) {
   return (
     <Modal>
-      <InfoPage {...props} />
+      <InfoPage {...props} isModal={true} />
     </Modal>
   );
 }
