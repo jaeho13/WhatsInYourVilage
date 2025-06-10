@@ -10,11 +10,26 @@ export default function PokemonTabs({
   koreanSkill,
 }: PokemonTabsProps) {
   const [activeTab, setActiveTab] = useState<TabType>("소개");
+  const [isShared, setIsShared] = useState(false);
 
   const statNameMap: { [key: string]: string } = {
     hp: "HP",
     attack: "공격",
     defense: "방어",
+  };
+
+  const handleShare = async () => {
+    if (isShared) return;
+
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setIsShared(true);
+      setTimeout(() => {
+        setIsShared(false);
+      }, 1500);
+    } catch (err) {
+      console.error("URL 복사 실패:", err);
+    }
   };
 
   const renderTabContent = () => {
@@ -100,8 +115,13 @@ export default function PokemonTabs({
       <div className={style.bottomArea}>
         {renderTabContent()}
         <div className={style.btnBind}>
-          <button className={style.btnOption}>카드보기</button>
-          <button className={style.btnOption}>즐겨찾기</button>
+          <button
+            className={style.btnOption}
+            onClick={handleShare}
+            disabled={isShared}
+          >
+            {isShared ? "복사 완료!!" : "공유하기"}
+          </button>
         </div>
       </div>
     </>
