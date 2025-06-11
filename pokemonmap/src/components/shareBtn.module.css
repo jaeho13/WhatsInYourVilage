@@ -1,0 +1,12 @@
+.btnOption {
+    width: 45%;
+    min-width: 160px;
+    height: 60px;
+    border: none;
+    border-radius: 12px;
+    background-color: #d4eaf7;
+}
+
+.btnOption:hover {
+    background-color: #b6ccd8;
+}

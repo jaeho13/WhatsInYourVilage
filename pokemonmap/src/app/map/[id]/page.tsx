@@ -2,6 +2,8 @@ import Image from "next/image";
 import style from "./page.module.css";
 import { localeMap, pokemonByLocale } from "@/types";
 import Link from "next/link";
+import ShareBtn from "@/components/shareBtn";
+import { typeColorMap } from "@/types";
 
 export default async function Page({
   params,
@@ -50,7 +52,7 @@ export default async function Page({
         ))}
       </div>
       <div className={style.bottom}>
-        <div className={style.shareBtn}>공유하기</div>
+        <ShareBtn />
       </div>
     </div>
   );
