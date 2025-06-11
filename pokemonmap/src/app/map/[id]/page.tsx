@@ -34,12 +34,24 @@ export default async function Page({
     return <div>오류가 발생했습니다...</div>;
   }
 
+  // 포켓몬들에 배경색 정보를 미리 추가
+  const pokemonsWithColors = pokemons.map((pokemon) => ({
+    ...pokemon,
+    backgroundStyle:
+      typeColorMap[pokemon.types?.[0]?.type?.name] ||
+      "linear-gradient(135deg, #E0E0E0 0%, #9E9E9E 50%, #424242 100%)",
+  }));
+
   return (
     <div className={style.container}>
       <div className={style.localeText}>{localeName}에 있을 수 있는 포켓몬</div>
       <div className={style.boxBind}>
-        {pokemons.map((pokemon) => (
-          <div key={pokemon.id} className={style.infoBox}>
+        {pokemonsWithColors.map((pokemon) => (
+          <div
+            key={pokemon.id}
+            className={style.infoBox}
+            style={{ background: pokemon.backgroundStyle }}
+          >
             <Link href={`/info/${pokemon.id}`}>
               <Image
                 src={pokemon.sprites.front_default}
