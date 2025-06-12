@@ -5,13 +5,10 @@ export default function Page() {
   return (
     <>
       <div className={style.container}>
-        <div className={style.mainImg}>
-          <Image
-            src="/map.png"
-            alt="test"
-            fill
-            style={{ objectFit: "contain" }}
-          />
+        <div className={style.main}>
+          <div className={style.mainImg}>
+            <Image src="/map.png" alt="test" width={500} height={500} />
+          </div>
         </div>
       </div>
     </>
