@@ -3,7 +3,12 @@ import style from "./page.module.css";
 import { localeMap, pokemonByLocale } from "@/types";
 import Link from "next/link";
 import ShareBtn from "@/components/shareBtn";
-import { typeColorMap } from "@/types";
+import {
+  typeColorMap,
+  PokemonName,
+  PokemonSpecies,
+  FlavorTextEntry,
+} from "@/types";
 
 export default async function Page({
   params,
@@ -34,8 +39,24 @@ export default async function Page({
     return <div>오류가 발생했습니다...</div>;
   }
 
+  // 포켓몬들의 종(species) 정보도 함께 가져오기
+  const pokemonsWithSpecies = await Promise.all(
+    pokemons.map(async (pokemon) => {
+      const speciesRes = await fetch(
+        `https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`
+      );
+      const speciesData = await speciesRes.json();
+      const koreanName =
+        speciesData.names.find(
+          (name: PokemonName) => name.language.name === "ko"
+        )?.name || pokemon.name;
+
+      return { ...pokemon, koreanName };
+    })
+  );
+
   // 포켓몬들에 배경색 정보를 미리 추가
-  const pokemonsWithColors = pokemons.map((pokemon) => ({
+  const pokemonsWithColors = pokemonsWithSpecies.map((pokemon) => ({
     ...pokemon,
     backgroundStyle:
       typeColorMap[pokemon.types?.[0]?.type?.name] ||
@@ -47,18 +68,21 @@ export default async function Page({
       <div className={style.localeText}>{localeName}에 있을 수 있는 포켓몬</div>
       <div className={style.boxBind}>
         {pokemonsWithColors.map((pokemon) => (
-          <div
-            key={pokemon.id}
-            className={style.infoBox}
-            style={{ background: pokemon.backgroundStyle }}
-          >
-            <Link href={`/info/${pokemon.id}`}>
-              <Image
-                src={pokemon.sprites.front_default}
-                alt={pokemon.name}
-                width={150}
-                height={150}
-              />
+          <div key={pokemon.id} className={style.pokemonCard}>
+            <Link href={`/info/${pokemon.id}`} className={style.cardLink}>
+              <div
+                className={style.imageContainer}
+                style={{ background: pokemon.backgroundStyle }}
+              >
+                <Image
+                  src={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                  width={150}
+                  height={150}
+                  className={style.pokemonImage}
+                />
+              </div>
+              <div className={style.pokemonName}>{pokemon.koreanName}</div>
             </Link>
           </div>
         ))}
