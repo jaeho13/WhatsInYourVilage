@@ -33,13 +33,13 @@ export default async function Page({
 
   try {
     // 1. 포켓몬 기본 정보 가져오기
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_POKEMON_API_URL}/${id}`);
     if (!res.ok) throw new Error();
     pokemon = await res.json();
 
     // 2. 종(species) 정보 가져오기
     const speciesRes = await fetch(
-      `https://pokeapi.co/api/v2/pokemon-species/${id}`
+      `${process.env.NEXT_PUBLIC_POKEMON_SPECIES_API_URL}/${id}`
     );
     if (!speciesRes.ok) throw new Error();
     pokemonSpecies = await speciesRes.json();

@@ -47,7 +47,9 @@ export default async function Page({
   try {
     const responses = await Promise.all(
       pokeIds.map(async (id) => {
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_POKEMON_API_URL}/${id}`
+        );
         if (!res.ok) {
           throw new Error();
         }
@@ -64,7 +66,7 @@ export default async function Page({
   const pokemonsWithSpecies = await Promise.all(
     pokemons.map(async (pokemon) => {
       const speciesRes = await fetch(
-        `https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`
+        `${process.env.NEXT_PUBLIC_POKEMON_SPECIES_API_URL}/${pokemon.id}`
       );
       const speciesData = await speciesRes.json();
       const koreanName =
