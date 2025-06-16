@@ -5,13 +5,14 @@
 }
 
 .main {
-  /* position: relative; */
   width: 100%;
-  height: calc(100dvh - 70px);
+  min-height: calc(100vh - 70px);
   background: linear-gradient(180deg, #FFFEF7 0%, #F9F6E8 40%, #F0EBD8 100%);
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 50px;
+  box-sizing: border-box;
 }
 
 .mainImg {
