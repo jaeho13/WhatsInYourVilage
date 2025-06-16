@@ -9,6 +9,26 @@ import {
   PokemonSpecies,
   FlavorTextEntry,
 } from "@/types";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const localeKey = params.id;
+  const localeName = localeMap[localeKey] ?? "알 수 없는 지역";
+
+  return {
+    title: `${localeName}에 어떤 포켓몬이 살까`,
+    description: `${localeName}에 사는 포켓몬 보러 가기`,
+    openGraph: {
+      title: `${localeName}에 어떤 포켓몬이 살까`,
+      description: `${localeName}에 사는 포켓몬 보러 가기`,
+      // images: ["/thumbnail.png"],
+    },
+  };
+}
 
 export default async function Page({
   params,
