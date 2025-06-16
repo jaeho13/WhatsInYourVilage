@@ -14,9 +14,10 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const localeKey = params.id;
+  const { id } = await params;
+  const localeKey = id;
   const localeName = localeMap[localeKey] ?? "알 수 없는 지역";
 
   return {
