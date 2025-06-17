@@ -19,7 +19,14 @@ export default function Home() {
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.mainImg}>
-            <Image src="/main.png" alt="mainImg" width={500} height={500} />
+            <Image
+              src="/main.png"
+              alt="mainImg"
+              fill
+              style={{
+                objectFit: "contain",
+              }}
+            />
           </div>
           <Link href={"/map"}>
             <button className={style.btn}>시작하기</button>

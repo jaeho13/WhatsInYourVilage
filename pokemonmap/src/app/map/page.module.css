@@ -4,7 +4,6 @@
 }
 
 .main {
-    /* position: relative; */
     width: 100%;
     height: calc(100dvh - 70px);
     background: linear-gradient(180deg, #FFFEF7 0%, #F9F6E8 40%, #F0EBD8 100%);
@@ -12,5 +11,8 @@
 }
 
 .mainImg {
-    margin-top: 50px;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1
 }
