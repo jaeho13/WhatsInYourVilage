@@ -70,6 +70,7 @@ export default function RootLayout({
                   <option value="Jongno">종로구</option>
                   <option value="Jung">중구</option>
                   <option value="Jungnang">중랑구</option>
+                  <option value="unknown">???</option>
                 </select>
               </div>
             )}

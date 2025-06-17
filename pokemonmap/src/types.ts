@@ -28,6 +28,7 @@ export const localeMap: LocaleMap = {
     Jongno: "종로구",
     Jung: "중구",
     Jungnang: "중랑구",
+    "???": "알 수 없는 지역",
 };
   
 export const pokemonByLocale: { [key: string]: number[] } = {

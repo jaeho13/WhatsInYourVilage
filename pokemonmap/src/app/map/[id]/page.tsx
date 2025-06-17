@@ -38,9 +38,12 @@ export default async function Page({
 }) {
   const { id } = await params;
   const localeKey = id;
-  const localeName = localeMap[localeKey] ?? "알 수 없는 지역";
 
-  const pokeIds = pokemonByLocale[localeKey] ?? pokemonByLocale[""];
+  const isValidLocale = localeMap[localeKey] !== undefined;
+  const localeName = isValidLocale ? localeMap[localeKey] : "알 수 없는 지역";
+  const pokeIds = isValidLocale
+    ? pokemonByLocale[localeKey]
+    : [144, 145, 146, 149, 150, 151];
 
   let pokemons;
 
@@ -88,7 +91,11 @@ export default async function Page({
 
   return (
     <div className={style.container}>
-      <div className={style.localeText}>{localeName}에 있을 수 있는 포켓몬</div>
+      <div className={style.localeText}>
+        {isValidLocale
+          ? `${localeName}에 있을 수 있는 포켓몬`
+          : `알 수 없는 지역입니다.`}
+      </div>
       <div className={style.boxBind}>
         {pokemonsWithColors.map((pokemon) => (
           <div key={pokemon.id} className={style.pokemonCard}>
