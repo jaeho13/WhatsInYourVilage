@@ -162,3 +162,12 @@ export interface PokemonTabsProps {
   stats: PokemonStat[];
   koreanSkill: string[];
 }
+
+
+export interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export interface PokemonPageProps extends PageProps {
+  isModal?: boolean;
+}
