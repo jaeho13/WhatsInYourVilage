@@ -7,7 +7,6 @@ import {
   PokemonName,
   MoveDetail,
   typeColorMap,
-  PokemonPageProps,
 } from "@/types";
 import BackIcon from "@/components/backIcon";
 import PokemonTabs from "./pokemonTabs";
@@ -15,7 +14,10 @@ import PokemonTabs from "./pokemonTabs";
 export default async function Page({
   params,
   isModal = false,
-}: PokemonPageProps) {
+}: {
+  params: Promise<{ id: string }>;
+  isModal?: boolean;
+}) {
   const { id } = await params;
 
   let rarity: string;
