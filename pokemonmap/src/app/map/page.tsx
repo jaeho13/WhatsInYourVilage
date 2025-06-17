@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "우리 동네 포켓몬 찾기",
     description: "우리 동네에는 어떤 포켓몬이 살까",
-    // images: ["/thumbnail.png"],
+    images: ["/thumbnail.png"],
   },
 };
 
@@ -18,7 +18,7 @@ export default function Page() {
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.mainImg}>
-            <Image src="/map.png" alt="test" width={500} height={500} />
+            <Image src="/map.png" alt="mapImg" width={500} height={500} />
           </div>
         </div>
       </div>

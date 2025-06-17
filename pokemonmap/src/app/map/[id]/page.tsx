@@ -26,7 +26,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${localeName}에 어떤 포켓몬이 살까`,
       description: `${localeName}에 사는 포켓몬 보러 가기`,
-      // images: ["/thumbnail.png"],
+      images: ["/thumbnail.png"],
     },
   };
 }

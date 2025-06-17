@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "우리 동네 포켓몬 찾기",
     description: "우리 동네에는 어떤 포켓몬이 살까",
-    // images: ["/thumbnail.png"],
+    images: ["/thumbnail.png"],
   },
 };
 
@@ -19,7 +19,7 @@ export default function Home() {
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.mainImg}>
-            <Image src="/main.png" alt="test" width={500} height={500} />
+            <Image src="/main.png" alt="mainImg" width={500} height={500} />
           </div>
           <Link href={"/map"}>
             <button className={style.btn}>시작하기</button>
