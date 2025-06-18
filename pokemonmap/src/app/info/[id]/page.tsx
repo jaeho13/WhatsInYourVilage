@@ -17,7 +17,7 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
   isModal?: boolean;
-}) {
+} & any) {
   const { id } = await params;
 
   let rarity: string;
