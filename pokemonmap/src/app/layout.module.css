@@ -2,9 +2,10 @@
    width: 100%;
     width: 100wvh;
     max-width: 500px;
-    height: 100vh;
+    height: 100%;
     margin: 0 auto;
     box-shadow: rgba(100, 100, 100, 0.7) 0px 0px 29px 0px;
+    /* border: 2px solid red; */
  }
 
  .header {
