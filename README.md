@@ -36,6 +36,7 @@ https://pokemonmap-steel.vercel.app
 ### 3. 스켈레톤 UI
 #### - Suspense fallback을 활용한 비동기 렌더링 처리
 #### - 포켓몬 리스트 로딩 시, 스켈레톤 UI를 표시하여 사용자 이탈 방지
+#### - Shimmer 효과 적용, 생동감 있는 로딩 화면 구현
 <br />
 
 ## 🚀 성능 최적화
