@@ -130,7 +130,7 @@ export default async function Page({
           : `알 수 없는 지역입니다.`}
       </div>
       <div className={style.boxBind}>
-        <Suspense fallback={<PokemonListSkeleton count={4} />}>
+        <Suspense fallback={<PokemonListSkeleton count={6} />}>
           <PokemonCards localeKey={localeKey} />
         </Suspense>
       </div>
