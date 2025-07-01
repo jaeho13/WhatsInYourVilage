@@ -19,7 +19,7 @@ https://pokemonmap-steel.vercel.app
 <br />
 
 ## 🚀 화면
-<img src="https://github.com/user-attachments/assets/30603c68-e684-4d0c-93eb-c8aef9a546eb" width="40%" height="500px" >
+<img src="https://github.com/user-attachments/assets/22d975a6-5a40-4dc0-9250-4465354cf231" width="40%" height="500px" >
 <br />
 
 ## 🚀 핵심 기술
