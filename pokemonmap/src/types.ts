@@ -107,27 +107,6 @@ export const typeMap: { [key: string]: string } = {
   fairy: "페어리",
 };
 
-// export const typeColorMap: { [key: string]: string } = {
-//   grass: "#A8E6A3",
-//   bug: "#A8E6A3",
-//   poison: "#A8E6A3",
-//   fire: "#FF7262",
-//   water: "#76C7F2",
-//   ice: "#76C7F2",
-//   electric: "#FFF176",
-//   fighting: "#F4A460",
-//   ground: "#F4A460",
-//   rock: "#F4A460",
-//   psychic: "#CBA4E8",
-//   ghost: "#CBA4E8",
-//   normal: "#E0E0E0",
-//   flying: "#E0E0E0",
-//   dark: "#2F2F2F",
-//   steel: "#B0BEC5",
-//   fairy: "#F8BBD0",
-//   dragon: "#FFA726",
-// };
-
 export const typeColorMap: { [key: string]: string } = {
   grass: "linear-gradient(135deg, #A8E6A3 0%, #7CB342 50%, #558B2F 100%)",
   bug: "linear-gradient(135deg, #A8E6A3 0%, #8BC34A 50%, #689F38 100%)",
