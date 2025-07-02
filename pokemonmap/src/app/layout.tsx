@@ -5,7 +5,7 @@ import "./globals.css";
 import style from "./layout.module.css";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReactNode } from "react";
 
 export default function RootLayout({
@@ -17,7 +17,12 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   const [defaultValue, setDefaultValue] = useState("");
+  const [isNavigating, setIsNavigating] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsNavigating(false);
+  }, [pathname]);
 
   return (
     <html lang="en">
@@ -39,6 +44,7 @@ export default function RootLayout({
                   onChange={(e) => {
                     const selectedValue = e.target.value;
                     setDefaultValue(selectedValue);
+                    setIsNavigating(true);
                     router.push(`/map/${selectedValue}`);
                   }}
                 >
@@ -75,6 +81,20 @@ export default function RootLayout({
               </div>
             )}
           </header>
+
+          {isNavigating && (
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                zIndex: 100,
+              }}
+            ></div>
+          )}
+
           <main>{children}</main>
         </div>
         {modal}
