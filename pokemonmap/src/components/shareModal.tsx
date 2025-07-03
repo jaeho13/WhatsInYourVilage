@@ -41,7 +41,7 @@ export default function ShareModal({ onClose }: ShareModalProps) {
           <Image src="/kakao.svg" alt="kakaoIcon" width={55} height={55} />
         </div>
         <div className={style.copyArea}>
-          <div>{window.location.href}</div>
+          <div className={style.copyUrl}>{window.location.href}</div>
           <button className={style.copyBtn} onClick={handleShare}>
             {isShared ? "완료" : "복사"}
           </button>
