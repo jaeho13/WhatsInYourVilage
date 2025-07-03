@@ -1,0 +1,79 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.modal {
+    width: 70%;
+    max-width: 350px;
+    height: 30%;
+    max-height: 200px;
+    background: white;
+    border-radius: 12px;
+    position: relative;
+    border: none;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.btn {
+    background-color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icons {
+    height: 70px;
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+}
+
+.copyArea {
+    width: 100%;
+    height: 60px;
+    border: 1px solid silver;
+    border-radius: 12px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.copyBtn {
+    width: 60px;
+    height: 40px;
+    background-color: #065fd4;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+}
+

@@ -2,33 +2,25 @@
 
 import { useState } from "react";
 import style from "./shareBtn.module.css";
+import ShareModal from "./shareModal";
 
 export default function ShareBtn() {
-  const [isShared, setIsShared] = useState(false);
+  const [shareModal, setShareModal] = useState(false);
 
-  const handleShare = async () => {
-    if (isShared) return;
+  const openModal = () => {
+    setShareModal(true);
+  };
 
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setIsShared(true);
-      setTimeout(() => {
-        setIsShared(false);
-      }, 1500);
-    } catch (err) {
-      console.error("URL 복사 실패:", err);
-    }
+  const closeModal = () => {
+    setShareModal(false);
   };
 
   return (
     <>
-      <button
-        className={style.btnOption}
-        onClick={handleShare}
-        disabled={isShared}
-      >
-        {isShared ? "복사 완료!!" : "공유하기"}
+      <button className={style.btnOption} onClick={openModal}>
+        공유하기
       </button>
+      {shareModal && <ShareModal onClose={closeModal} />}
     </>
   );
 }
