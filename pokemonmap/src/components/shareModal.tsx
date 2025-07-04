@@ -37,8 +37,46 @@ export default function ShareModal({ onClose }: ShareModalProps) {
         </div>
         <div className={style.icons}>
           <Image src="/kakao.svg" alt="kakaoIcon" width={55} height={55} />
-          <Image src="/kakao.svg" alt="kakaoIcon" width={55} height={55} />
-          <Image src="/kakao.svg" alt="kakaoIcon" width={55} height={55} />
+
+          <button
+            className={style.btnEvent}
+            onClick={() =>
+              window.open(
+                `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                  window.location.href
+                )}`,
+                "_blank",
+                "width=600,height=400"
+              )
+            }
+          >
+            <Image
+              src="/facebook.svg"
+              alt="facebookIcon"
+              width={55}
+              height={55}
+            />
+          </button>
+
+          <button
+            className={style.btnEvent}
+            onClick={() =>
+              window.open(
+                `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                  window.location.href
+                )}`,
+                "_blank",
+                "width=600,height=400"
+              )
+            }
+          >
+            <Image
+              src="/twitter.svg"
+              alt="twitterIcon"
+              width={55}
+              height={55}
+            />
+          </button>
         </div>
         <div className={style.copyArea}>
           <div className={style.copyUrl}>{window.location.href}</div>
