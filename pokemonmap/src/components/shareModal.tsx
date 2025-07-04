@@ -4,6 +4,7 @@ import Image from "next/image";
 import style from "./shareModal.module.css";
 import { XCircle } from "@deemlol/next-icons";
 import { useState } from "react";
+import { shareCurrentPage } from "./share/kakaoShare";
 
 interface ShareModalProps {
   onClose: () => void;
@@ -26,6 +27,10 @@ export default function ShareModal({ onClose }: ShareModalProps) {
     }
   };
 
+  const handleKakaoShare = () => {
+    shareCurrentPage({});
+  };
+
   return (
     <div className={style.overlay} onClick={onClose}>
       <div className={style.modal} onClick={(e) => e.stopPropagation()}>
@@ -36,7 +41,10 @@ export default function ShareModal({ onClose }: ShareModalProps) {
           </button>
         </div>
         <div className={style.icons}>
-          <Image src="/kakao.svg" alt="kakaoIcon" width={55} height={55} />
+          {/* 카카오 공유 버튼 */}
+          <button className={style.btnEvent} onClick={handleKakaoShare}>
+            <Image src="/kakao.svg" alt="kakaoIcon" width={55} height={55} />
+          </button>
 
           <button
             className={style.btnEvent}

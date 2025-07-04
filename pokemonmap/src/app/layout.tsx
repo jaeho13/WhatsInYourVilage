@@ -7,6 +7,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { ReactNode } from "react";
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -27,6 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Script
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+          onLoad={() => {
+            const kakao = (window as any).Kakao;
+            if (kakao && !kakao.isInitialized()) {
+              kakao.init("08c8b8645f7b16889157e11a1dd6b8c9");
+            }
+          }}
+        />
         <div className={style.container}>
           <header className={style.header}>
             <div className={style.headerText}>
