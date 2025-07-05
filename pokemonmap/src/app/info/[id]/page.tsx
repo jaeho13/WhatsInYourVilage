@@ -10,6 +10,70 @@ import {
 } from "@/types";
 import BackIcon from "@/components/backIcon";
 import PokemonTabs from "./pokemonTabs";
+import { Metadata } from "next";
+
+// 한국어 조사 처리 함수
+function getKoreanParticle(name: string, type: "가" | "이"): string {
+  if (!name) return type === "가" ? "가" : "이";
+
+  const lastChar = name[name.length - 1];
+  const lastCharCode = lastChar.charCodeAt(0);
+
+  // 한글인지 확인
+  if (lastCharCode >= 0xac00 && lastCharCode <= 0xd7a3) {
+    // 받침이 있는지 확인 (종성이 있으면 받침 있음)
+    const hasJongseong = (lastCharCode - 0xac00) % 28 !== 0;
+
+    if (type === "가") {
+      return hasJongseong ? "이" : "가";
+    } else {
+      return hasJongseong ? "이" : "가";
+    }
+  }
+
+  // 한글이 아닌 경우 기본값 반환
+  return type === "가" ? "가" : "이";
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  // 1. 포켓몬 기본 정보 가져오기
+  const res = await fetch(`${process.env.NEXT_PUBLIC_POKEMON_API_URL}/${id}`);
+  if (!res.ok) throw new Error();
+  const pokemon = await res.json();
+
+  // 2. 종(species) 정보 가져오기
+  const speciesRes = await fetch(
+    `${process.env.NEXT_PUBLIC_POKEMON_SPECIES_API_URL}/${id}`
+  );
+  if (!speciesRes.ok) throw new Error();
+  const pokemonSpecies: PokemonSpecies = await speciesRes.json();
+
+  // 3. 한국어 이름 찾기
+  const koreanName =
+    pokemonSpecies.names.find(
+      (name: PokemonName) => name.language.name === "ko"
+    )?.name || pokemon.name;
+
+  // 4. 조사 처리
+  const subjectParticle = getKoreanParticle(koreanName, "가"); // 가/이
+  const possessiveParticle = getKoreanParticle(koreanName, "이"); // 이/가 (소유격에서는 반대)
+
+  return {
+    title: `${koreanName}${subjectParticle} 어디에 살까??`,
+    description: `${koreanName}${possessiveParticle} 사는 동네 확인하기`,
+    openGraph: {
+      title: `${koreanName}${subjectParticle} 어디에 살까??`,
+      description: `${koreanName}${possessiveParticle} 사는 동네 확인하기`,
+      images: [pokemon.sprites.front_default],
+    },
+  };
+}
 
 export default async function Page({
   params,
