@@ -11,6 +11,8 @@ import {
 import BackIcon from "@/components/backIcon";
 import PokemonTabs from "./pokemonTabs";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import PokemonDetailSkeleton from "@/components/skeleton/PokemonDetailSkeleton";
 
 // 한국어 조사 처리 함수
 function getKoreanParticle(name: string, type: "가" | "이"): string {
@@ -75,94 +77,103 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params,
-  isModal = false,
-}: {
-  params: Promise<{ id: string }>;
-  isModal?: boolean;
-} & any) {
-  const { id } = await params;
+async function fetchPokemonDetail(id: string) {
+  // 1. 포켓몬 기본 정보 가져오기
+  const res = await fetch(`${process.env.NEXT_PUBLIC_POKEMON_API_URL}/${id}`);
+  if (!res.ok) throw new Error();
+  const pokemon = await res.json();
 
+  // 2. 종(species) 정보 가져오기
+  const speciesRes = await fetch(
+    `${process.env.NEXT_PUBLIC_POKEMON_SPECIES_API_URL}/${id}`
+  );
+  if (!speciesRes.ok) throw new Error();
+  const pokemonSpecies: PokemonSpecies = await speciesRes.json();
+
+  // 희귀도 계산
+  const rate = pokemonSpecies.capture_rate;
   let rarity: string;
-  let pokemon;
-  let pokemonSpecies: PokemonSpecies;
-  let koreanName: string;
-  let koreanGenus: string;
-
-  let koreanDescription: string;
-  let koreanTypes: string[] = [];
-  let koreanSkill: string[] = [];
-  let backgroundColor: string = "white";
-
-  try {
-    // 1. 포켓몬 기본 정보 가져오기
-    const res = await fetch(`${process.env.NEXT_PUBLIC_POKEMON_API_URL}/${id}`);
-    if (!res.ok) throw new Error();
-    pokemon = await res.json();
-
-    // 2. 종(species) 정보 가져오기
-    const speciesRes = await fetch(
-      `${process.env.NEXT_PUBLIC_POKEMON_SPECIES_API_URL}/${id}`
-    );
-    if (!speciesRes.ok) throw new Error();
-    pokemonSpecies = await speciesRes.json();
-
-    const rate = pokemonSpecies.capture_rate;
-
-    if (rate <= 29) {
-      rarity = "전설/환상";
-    } else if (rate <= 70) {
-      rarity = "희귀";
-    } else if (rate <= 120) {
-      rarity = "일반";
-    } else {
-      rarity = "흔함";
-    }
-
-    // 3. 한국어 이름/설명
-    koreanName =
-      pokemonSpecies.names.find(
-        (name: PokemonName) => name.language.name === "ko"
-      )?.name || pokemon.name;
-
-    koreanDescription =
-      pokemonSpecies.flavor_text_entries.find(
-        (entry: FlavorTextEntry) => entry.language.name === "ko"
-      )?.flavor_text || "설명을 찾을 수 없습니다.";
-
-    koreanGenus =
-      pokemonSpecies.genera.find((g) => g.language.name === "ko")?.genus ||
-      "분류 없음";
-
-    // 4. 포켓몬 타입 한글명 & 배경색 처리
-    koreanTypes = pokemon.types.map(
-      (t: any) => typeMap[t.type.name] || t.type.name
-    );
-    const primaryType = pokemon.types?.[0]?.type?.name;
-    backgroundColor = typeColorMap[primaryType] || "white";
-
-    // 5. 포켓몬 기술 4개만 가져와서 한글명 fetch
-    const moveUrls = pokemon.moves.slice(0, 4).map((m: any) => m.move.url);
-
-    const moveResults = await Promise.all(
-      moveUrls.map(async (url: any) => {
-        const res = await fetch(url);
-        if (!res.ok) return null;
-        const data: MoveDetail = await res.json();
-        const korean = data.names.find((n) => n.language.name === "ko");
-        return korean?.name || "이름 없음";
-      })
-    );
-
-    koreanSkill = moveResults.filter(Boolean) as string[];
-  } catch (error) {
-    console.log(error);
-    return <div>포켓몬을 찾을 수 없습니다...</div>;
+  if (rate <= 29) {
+    rarity = "전설/환상";
+  } else if (rate <= 70) {
+    rarity = "희귀";
+  } else if (rate <= 120) {
+    rarity = "일반";
+  } else {
+    rarity = "흔함";
   }
 
-  return (
-    <>
+  // 3. 한국어 이름/설명 (타입 안전하게 처리)
+  const koreanName =
+    pokemonSpecies.names.find(
+      (name: PokemonName) => name.language.name === "ko"
+    )?.name || pokemon.name;
+
+  const koreanDescription =
+    pokemonSpecies.flavor_text_entries.find(
+      (entry: FlavorTextEntry) => entry.language.name === "ko"
+    )?.flavor_text || "설명을 찾을 수 없습니다.";
+
+  const koreanGenus =
+    pokemonSpecies.genera.find((g) => g.language.name === "ko")?.genus ||
+    "분류 없음";
+
+  // 4. 포켓몬 타입 한글명 & 배경색 처리 (안전하게 처리)
+  const koreanTypes = pokemon.types.map(
+    (t: any) => typeMap[t.type.name] || t.type.name
+  );
+  const primaryType = pokemon.types?.[0]?.type?.name;
+  const backgroundColor = typeColorMap[primaryType] || "white";
+
+  // 5. 포켓몬 기술 4개만 가져와서 한글명 fetch (안전하게 처리)
+  const moveUrls = pokemon.moves.slice(0, 4).map((m: any) => m.move.url);
+
+  const moveResults = await Promise.all(
+    moveUrls.map(async (url: any) => {
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const data: MoveDetail = await res.json();
+      const korean = data.names.find((n) => n.language.name === "ko");
+      return korean?.name || "이름 없음";
+    })
+  );
+
+  const koreanSkill = moveResults.filter(Boolean) as string[];
+
+  return {
+    pokemon,
+    pokemonSpecies,
+    koreanName,
+    koreanGenus,
+    koreanDescription,
+    koreanTypes,
+    koreanSkill,
+    backgroundColor,
+    rarity,
+  };
+}
+
+async function PokemonDetailContent({
+  id,
+  isModal = false,
+}: {
+  id: string;
+  isModal?: boolean;
+}) {
+  try {
+    const pokemonData = await fetchPokemonDetail(id);
+    const {
+      pokemon,
+      koreanName,
+      koreanGenus,
+      koreanDescription,
+      koreanTypes,
+      koreanSkill,
+      backgroundColor,
+      rarity,
+    } = pokemonData;
+
+    return (
       <div
         className={`${style.modalPageContainer} ${
           !isModal ? style.border : ""
@@ -219,6 +230,25 @@ export default async function Page({
           koreanSkill={koreanSkill}
         />
       </div>
-    </>
+    );
+  } catch (error) {
+    console.log(error);
+    return <div>포켓몬을 찾을 수 없습니다...</div>;
+  }
+}
+
+export default async function Page({
+  params,
+  isModal = false,
+}: {
+  params: Promise<{ id: string }>;
+  isModal?: boolean;
+} & any) {
+  const { id } = await params;
+
+  return (
+    <Suspense fallback={<PokemonDetailSkeleton isModal={isModal} />}>
+      <PokemonDetailContent id={id} isModal={isModal} />
+    </Suspense>
   );
 }
