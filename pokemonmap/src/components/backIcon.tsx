@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { XCircle } from "@deemlol/next-icons";
 
@@ -16,7 +17,11 @@ export default function BackIcon({
   const router = useRouter();
 
   const handleClick = () => {
-    router.back();
+    if (typeof window !== "undefined" && window.history.length <= 2) {
+      router.push("/map/unknown");
+    } else {
+      router.back();
+    }
   };
 
   return (
