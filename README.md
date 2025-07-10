@@ -67,6 +67,7 @@ https://pokemonmap-steel.vercel.app
 <br />
 
 ## 🚀 회고
+https://velog.io/@jaehooo13/%EC%9A%B0%EB%8F%99%ED%8F%AC%EC%B0%A8-ypbmi1kz
 <br />
 
 ## 🚀 참고자료
