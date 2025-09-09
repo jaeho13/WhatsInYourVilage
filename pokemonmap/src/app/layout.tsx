@@ -27,6 +27,22 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        {/* ✅ Google Analytics GA4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-WLTSLCL4TR"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WLTSLCL4TR');
+          `}
+        </Script>
+      </head>
+
       <body>
         <Script
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
