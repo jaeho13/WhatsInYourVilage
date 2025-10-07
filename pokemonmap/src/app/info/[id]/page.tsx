@@ -13,6 +13,8 @@ import PokemonTabs from "./pokemonTabs";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import PokemonDetailSkeleton from "@/components/skeleton/PokemonDetailSkeleton";
+import { notFound } from "next/navigation";
+import Default from "../dafault";
 
 // 한국어 조사 처리 함수
 function getKoreanParticle(name: string, type: "가" | "이"): string {
@@ -245,6 +247,15 @@ export default async function Page({
   isModal?: boolean;
 } & any) {
   const { id } = await params;
+  const numericId = Number(id);
+
+  if (isNaN(numericId) || numericId <= 0) {
+    notFound();
+  }
+
+  if (numericId > 151) {
+    return <Default />;
+  }
 
   return (
     <Suspense fallback={<PokemonDetailSkeleton isModal={isModal} />}>
