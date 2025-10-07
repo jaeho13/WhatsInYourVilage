@@ -1,0 +1,9 @@
+.main {
+    width: 100%;
+    height: calc(100dvh - 70px);
+    background: linear-gradient(180deg, #FFFEF7 0%, #F9F6E8 40%, #F0EBD8 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
